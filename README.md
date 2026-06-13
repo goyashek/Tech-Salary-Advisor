@@ -2,7 +2,7 @@
 
 An end-to-end ML project that performs exploratory data analysis (EDA), implements preprocessing pipelines, compares multiple models, and deploys a Streamlit dashboard to predict technology compensation in India.
 
-**[🌐 Try the Live App](https://tech-salary-xgb.streamlit.app/)**
+**[🌐 Try the Live App](https://tech-salary-advisor.streamlit.app/)**
 
 ---
 
@@ -23,7 +23,7 @@ The dataset contains messy data (missing values, inconsistent string formatting,
 Tech-Salary-Advisor/
 │
 ├── data/
-│   └── salary_dataset_dirty.csv  ← Indian tech industry salary dataset 
+│   └── salary_dataset.csv  ← Indian tech industry salary dataset 
 │
 ├── notebooks/
 │   ├── EDA.ipynb                 ← data cleaning & visualizations
