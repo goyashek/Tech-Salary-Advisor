@@ -23,7 +23,7 @@ The dataset contains messy data (missing values, inconsistent string formatting,
 Tech-Salary-Advisor/
 │
 ├── data/
-│   └── salary_dataset.csv  ← Indian tech industry salary dataset 
+│   └── salary_dataset_dirty.csv  ← salary dataset
 │
 ├── notebooks/
 │   ├── EDA.ipynb                 ← data cleaning & visualizations
@@ -35,6 +35,7 @@ Tech-Salary-Advisor/
 │       ├── salary_model.pkl      ← scikit-learn pipeline (preprocessor + model)
 │       └── metadata.pkl          
 │
+├── packages.txt                  ← system dependencies (streamlit)
 ├── requirements.txt              ← package dependencies
 └── README.md                     ← this documentation
 ```
@@ -60,7 +61,7 @@ Open and run **`notebooks/Salary_Prediction.ipynb`**:
 * Imputes missing columns (median/mode) and standardizes messy text strings.
 * Parses multi-label skills into binary indicators.
 * Sets up a scikit-learn `Pipeline` utilizing `ColumnTransformer` (StandardScaler for experience, OHE for categoricals,etc).
-* Trains and compares **Ridge Regression, Random Forest, XGBoost, and a Neural Network (MLP)**.
+* Trains and compares **ElasticNet, Random Forest, XGBoost, and CatBoost**.
 * **Tunes hyperparameter spaces** for the top 2 models using `RandomizedSearchCV`.
 * Exports the final tuned pipeline and metadata to `streamlit/models/`.
 
@@ -79,11 +80,11 @@ The models were trained on 88,000 training records and evaluated on a 22,000-sam
 
 | Model | Mean Absolute Error (MAE) | R² Score |
 |---|---|---|
-| **Neural Network (MLP)** | ₹ 270,771.29 (~2.70 LPA) | 0.6761 |
-| **Random Forest (Base)** | ₹ 196,974.90 (~1.96 LPA) | 0.8209 |
-| **Ridge Regression** | ₹ 181,809.33 (~1.81 LPA) | 0.8429 |
-| **XGBoost (Base)** | ₹ 164,437.08 (~1.64 LPA) | 0.8697 |
-| **Tuned Random Forest** | ₹ 187,308.14 (~1.87 LPA) | 0.8313 |
-| **Tuned XGBoost (with CV)** | **₹ 166,380.76 (~1.66 LPA)** | **0.8669** |
+| **ElasticNet** | ₹ 2,43,005 (~2.43 LPA) | 0.7283 |
+| **Random Forest** | ₹ 1,96,974 (~1.96 LPA) | 0.8209 |
+| **XGBoost** | ₹ 1,64,437 (~1.64 LPA) | 0.8697 |
+| **CatBoost** | ₹ 1,80,936 (~1.80 LPA) | 0.8459 |
+| **Tuned XGBoost (CV)** | ₹ 1,63,186 (~1.63 LPA) | 0.8715 |
+| **Tuned CatBoost (CV)** | **₹ 1,60,258 (~1.60 LPA)** | **0.8753** |
 
-*Note: The **Tuned XGBoost Regressor Pipeline** is deployed in the Streamlit app due to its superior variance explanation (highest R² score) and low absolute error and also being cross validated 5 times on dataset.*
+*Note: The **Tuned CatBoost Regressor Pipeline** is deployed in the Streamlit app due to its superior R² score and lowest MAE, cross-validated with 3 folds.*
